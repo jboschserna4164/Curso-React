@@ -21,10 +21,15 @@ function App() {
 
   function eliminarUltimaFila() {
     if (articulos.length > 0) {
-      const temporal = Array.from(articulos); /* crear una copia del vector original llamando al método from */
-      temporal.pop();
-      setArticulos(temporal)
+      const temp = Array.from(articulos); /* crear una copia del vector original llamando al método from */
+      temp.pop();
+      setArticulos(temp);
     }
+  }
+
+  function borrarFila(code) {
+    const temp = articulos.filter((art) => art.codigo !== code); /* el método filter genera otro vector con todas las componentes que cumplen la condición que le pasamos en la función anónima */
+    setArticulos(temp)
   }
 
   return(
@@ -39,11 +44,11 @@ function App() {
               <td>{art.codigo}</td>
               <td>{art.descripcion}</td>
               <td>{art.precio}</td>
-            </tr>
+              <td><button onClick={() => borrarFila(art.codigo)}>Borrar</button></td>
+            </tr>           
           ))}
         </tbody>
       </table>
-      <button onClick={eliminarUltimaFila}>Eliminar ultima fila</button>
     </div>
 
   );
